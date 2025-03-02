@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Student Result</h2>
+        <p><strong>Student Name:</strong> {{ name }}</p>
+        <p><strong>Student ID:</strong> {{ student_id }}</p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>English</td><td>{{ english }}</td></tr>
+                <tr><td>Maths</td><td>{{ maths }}</td></tr>
+                <tr><td>Physics</td><td>{{ physics }}</td></tr>
+                <tr><td>Chemistry</td><td>{{ chemistry }}</td></tr>
+                <tr><td>Computer</td><td>{{ computer }}</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>{{ total }}</strong></td></tr>
+                <tr><td><strong>Percentage</strong></td><td><strong>{{ percentage }}%</strong></td></tr>
+            </tbody>
+        </table>
+
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

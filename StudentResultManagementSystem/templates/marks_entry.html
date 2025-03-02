@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Entry</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        background: white;
+        padding: 20px;
+        width: 90%;
+        margin: 50px auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    
+    h2 {
+        margin-bottom: 20px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    input {
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+        border: none;
+        background: #f9f9f9;
+    }
+    
+    input:read-only {
+        background: #e9e9e9;
+        font-weight: bold;
+    }
+    
+    button {
+        margin-top: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 150px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    </style>
+    
+    
+    <script>
+        function calculateTotalAndPercentage(row) {
+            let english = parseInt(row.querySelector(".english").value) || 0;
+            let maths = parseInt(row.querySelector(".maths").value) || 0;
+            let physics = parseInt(row.querySelector(".physics").value) || 0;
+            let chemistry = parseInt(row.querySelector(".chemistry").value) || 0;
+            let computer = parseInt(row.querySelector(".computer").value) || 0;
+            
+            let total = english + maths + physics + chemistry + computer;
+            let percentage = (total / 500) * 100;
+
+            row.querySelector(".total").value = total;
+            row.querySelector(".percentage").value = percentage.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Enter Student Marks</h2>
+        <form action="/submit_marks" method="POST">
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>English</th>
+                    <th>Maths</th>
+                    <th>Physics</th>
+                    <th>Chemistry</th>
+                    <th>Computer</th>
+                    <th>Total</th>
+                    <th>Percentage(%)</th>
+                </tr>
+                {% for student in students %}
+                <tr oninput="calculateTotalAndPercentage(this)">
+                    <td><input type="text" name="student_id[]" value="{{ student.student_id }}" readonly></td>
+                    <td><input type="text" name="student_name[]" value="{{ student.name }}" readonly></td>
+                    <td><input type="number" class="english" name="english[]" required></td>
+                    <td><input type="number" class="maths" name="maths[]" required></td>
+                    <td><input type="number" class="physics" name="physics[]" required></td>
+                    <td><input type="number" class="chemistry" name="chemistry[]" required></td>
+                    <td><input type="number" class="computer" name="computer[]" required></td>
+                    <td><input type="text" class="total" name="total[]" readonly></td>
+                    <td><input type="text" class="percentage" name="percentage[]" readonly></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button type="submit">Submit Marks</button>
+        </form>
+        
+    </div>
+
+</body>
+</html>
